@@ -1,4 +1,8 @@
+
 # Signboard
+from multiprocessing.sharedctypes import Value
+
+
 print('\n \n ************************************** \n **    Welcome to the Snakes Cafe!   ** \n **    Please see our menu below.    ** \n ** \n ** To quit at any time, type "quit" ** \n **************************************\n')
 
 # all menu items stored in nested dictionary
@@ -24,6 +28,7 @@ order = input('> ').lower().title()
 
 # declaring an empty list to store order history
 order_list = []
+order_dic = {}
 #print(order_list)
 
 
@@ -34,12 +39,14 @@ while order != 'Quit':
     for key in menu.keys():
 
         if order in menu[key].keys():
+            
+            # if item exists increment its value
+            menu[key][order] += 1
+
             #adding orders into a list
          
             order_list.append(order)
-        
-            # if item exists increment its value
-            menu[key][order] += 1
+            #order_dic[order]= menu[key][order]
 
             # logic for output for a single or multiple orders
             if menu[key][order] == 1:
@@ -57,4 +64,6 @@ while order != 'Quit':
     order = input('> ').lower().title()
 else:
     print(' *********************************** \n ** Thank you for using snakes cafe! ** \n *********************************** \n')
-    print (f'Clients Order is : {order_list}')
+    print (f'Clients Order is :')
+    print(*order_list, sep='\n')
+    #print(order_dic, sep='\n')

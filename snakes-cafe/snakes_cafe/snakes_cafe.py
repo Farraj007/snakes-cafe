@@ -1,7 +1,5 @@
 
 # Signboard
-from multiprocessing.sharedctypes import Value
-
 
 print('\n \n ************************************** \n **    Welcome to the Snakes Cafe!   ** \n **    Please see our menu below.    ** \n ** \n ** To quit at any time, type "quit" ** \n **************************************\n')
 
@@ -23,13 +21,11 @@ for items in menu:
 print(' *********************************** \n ** What would you like to order? ** \n *********************************** \n')
 # making a function to take the clients input and render it
 
-# initial input
+# initial input with capitaliztation for the first word of any amount of words.
 order = input('> ').lower().title()
 
-# declaring an empty list to store order history
-order_list = []
+# declaring an empty dictionary to store order history and quantities while the code is running
 order_dic = {}
-#print(order_list)
 
 
 # if user didn't run 'quit" command excute the while loop
@@ -44,9 +40,7 @@ while order != 'Quit':
             menu[key][order] += 1
 
             #adding orders into a list
-         
-            order_list.append(order)
-            #order_dic[order]= menu[key][order]
+            order_dic[order]= menu[key][order]
 
             # logic for output for a single or multiple orders
             if menu[key][order] == 1:
@@ -58,12 +52,18 @@ while order != 'Quit':
 
     # print this output if item not exists in our menu
     else:
-        print('\n ** Sorry this item is unavailable, please order item from our menu ** \n')
+        #when the user input "finish "the code will show the ordered items.
+         if order == 'Finish':
+          print (f'Clients Order is :')
+          for key in order_dic :
+            print (key, " : " , order_dic[key])
+            #print(*order_list, sep='\n') // this was a nice way to print a list but i choose dictionary instead so i t will show the amount with the order
+         else:
+          print('\n ** Sorry this item is unavailable, please order item from our menu ** \n')
 
     # ask user again
     order = input('> ').lower().title()
 else:
-    print(' *********************************** \n ** Thank you for using snakes cafe! ** \n *********************************** \n')
-    print (f'Clients Order is :')
-    print(*order_list, sep='\n')
-    #print(order_dic, sep='\n')
+ print(' *********************************** \n ** Thank you for using snakes cafe! ** \n *********************************** \n')
+    
+    
